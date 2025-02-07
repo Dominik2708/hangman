@@ -1,6 +1,14 @@
-export default function HangManWord() {
-  const word = "test";
-  const guessedLetters = ["t", "e"];
+type HangManWordProps = {
+  guessedLetters: string[];
+  wordToGuess: string;
+  reveal?: boolean;
+};
+
+export default function HangManWord({
+  guessedLetters,
+  wordToGuess,
+  reveal = false,
+}: HangManWordProps) {
   return (
     <div
       style={{
@@ -12,7 +20,7 @@ export default function HangManWord() {
         fontFamily: "monospace",
       }}
     >
-      {word.split("").map((letter, index) => {
+      {wordToGuess.split("").map((letter, index) => {
         return (
           <span
             key={index}
@@ -22,9 +30,14 @@ export default function HangManWord() {
           >
             <span
               style={{
-                visibility: guessedLetters.includes(letter)
-                  ? "visible"
-                  : "hidden",
+                visibility:
+                  guessedLetters.includes(letter.toLowerCase()) || reveal
+                    ? "visible"
+                    : "hidden",
+                color:
+                  !guessedLetters.includes(letter.toLowerCase()) && reveal
+                    ? "red"
+                    : "black",
               }}
             >
               {letter}

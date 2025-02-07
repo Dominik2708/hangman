@@ -1,3 +1,5 @@
+import styles from "./Keyboard.module.css";
+
 const KEYS = [
   "a",
   "b",
@@ -29,7 +31,19 @@ const KEYS = [
   "ö",
   "ü",
 ];
-export default function KeyBoard() {
+
+type KeyBoardProps = {
+  disabled?: boolean;
+  activeLetters: string[];
+  inactiveLetters: string[];
+  addGuessedLetter: (letter: string) => void;
+};
+export default function KeyBoard({
+  activeLetters,
+  inactiveLetters,
+  disabled = false,
+  addGuessedLetter,
+}: KeyBoardProps) {
   return (
     <div
       style={{
@@ -39,8 +53,17 @@ export default function KeyBoard() {
       }}
     >
       {KEYS.map((key) => {
+        const isActive = activeLetters.includes(key);
+        const inActive = inactiveLetters.includes(key);
         return (
-          <button className="" key={key}>
+          <button
+            onClick={() => addGuessedLetter(key)}
+            className={`${styles.btn} ${isActive ? styles.active : ""} ${
+              inActive ? styles.inactive : ""
+            }`}
+            disabled={isActive || inActive || disabled}
+            key={key}
+          >
             {key}
           </button>
         );
