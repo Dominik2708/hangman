@@ -1,97 +1,102 @@
-const HEAD = (
-  <div
+import head from "./assets/head.png"
+import body from "./assets/body.png"
+import arm1 from "./assets/arm1.png"
+import arm2 from "./assets/arm2.png"
+import leg1 from "./assets/leg1.png"
+import leg2 from "./assets/leg2.png"
+
+const HEAD = (isLoser: boolean, isWinner: boolean) => (
+  <img src={head} alt=""
     style={{
-      width: "50px",
-      height: "50px",
-      borderRadius: "100%",
-      border: "10px solid black",
+      filter: isLoser ? "sepia(1) hue-rotate(-50deg) saturate(3)" : isWinner ? "sepia(1) hue-rotate(100deg) saturate(3)" : "",
+      width: "100px",
+      height: "130px",
       position: "absolute",
-      top: "50px",
-      right: "-30px",
-    }}
-  />
+      top: "33px",
+      right: "-44px",
+    }} />
 );
 const BODY = (
-  <div
+  <img src={body}
     style={{
-      width: "10px",
-      height: "100px",
-      background: "black",
+      width: "75px",
+      height: "120px",
       position: "absolute",
-      top: "120px",
-      right: "0",
+      top: "140px",
+      right: "-35px",
+      zIndex: -1,
     }}
   />
 );
 const RIGHT_ARM = (
-  <div
+  <img src={arm2}
     style={{
-      width: "100px",
-      height: "10px",
-      background: "black",
+      width: "130px",
+      height: "150px",
       position: "absolute",
-      top: "150px",
-      right: "-100px",
-      rotate: "-30deg",
+      top: "128px",
+      right: "-138px",
+      rotate: "0deg",
       transformOrigin: "left bottom",
     }}
   />
 );
 const LEFT_ARM = (
-  <div
+  <img src={arm1}
     style={{
-      width: "100px",
-      height: "10px",
-      background: "black",
-      position: "absolute",
-      top: "150px",
-      right: "10px",
-      rotate: "30deg",
-      transformOrigin: "right bottom",
+    width: "150px",
+    height: "163px",
+    position: "absolute",
+    top: "131px",
+    right: "20px",
+    rotate: "2deg",
+    transformOrigin: "right bottom",
     }}
   />
 );
 const RIGHT_LEG = (
-  <div
+  <img src={leg2}
     style={{
-      width: "100px",
-      height: "10px",
-      background: "black",
+      width: "150px",
+      height: "190px",
       position: "absolute",
-      top: "210px",
-      right: "-90px",
-      rotate: "60deg",
+      top: "229px",
+      right: "-102px",
+      rotate: "0deg", 
       transformOrigin: "left bottom",
     }}
   />
 );
 const LEFT_LEG = (
-  <div
+  <img src={leg1}
     style={{
-      width: "100px",
-      height: "10px",
-      background: "black",
+      width: "157px",
+      height: "188px",
       position: "absolute",
-      top: "210px",
-      right: "0",
-      rotate: "-60deg",
+      top: "226px",
+      right: "-44px",
+      rotate: "0deg",
       transformOrigin: "right bottom",
     }}
   />
 );
 
-const BODY_PARTS = [HEAD, BODY, RIGHT_ARM, LEFT_ARM, RIGHT_LEG, LEFT_LEG];
+const BODY_PARTS = (isLoser: boolean, isWinner: boolean) => [HEAD(isLoser, isWinner), BODY, RIGHT_ARM, LEFT_ARM, RIGHT_LEG, LEFT_LEG];
 
 type HangManDrawingProps = {
   numberOfGuesses: number;
+  isLoser: boolean;
+  isWinner: boolean;
 };
 
 export default function HangManDrawing({
   numberOfGuesses,
+  isLoser,
+  isWinner,
 }: HangManDrawingProps) {
   return (
     <div style={{ position: "relative" }}>
-      {BODY_PARTS.slice(0, numberOfGuesses)}
+      {BODY_PARTS(isLoser, isWinner).slice(0, numberOfGuesses)}
       <div
         style={{
           height: "50px",
