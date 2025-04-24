@@ -27,9 +27,6 @@ const KEYS = [
   "x",
   "y",
   "z",
-  "ä",
-  "ö",
-  "ü",
 ];
 
 type KeyBoardProps = {
