@@ -59,7 +59,7 @@ function App() {
         {isWinner && "Gewonnen!"}
         {isLoser && "Verloren!"}
       </div>
-      <HangManDrawing numberOfGuesses={inCorrectLetters.length} />
+      <HangManDrawing numberOfGuesses={inCorrectLetters.length} isLoser={isLoser} isWinner={isWinner} />
       <HangManWord
         reveal={isLoser}
         guessedLetters={guessedLetters}
